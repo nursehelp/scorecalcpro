@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS & OET Band Score Calculator | Instant Band & Grade Converter</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="IELTS & OET Band Score Calculator | Instant Band & Grade Converter">
+    <meta name="description" content="Free official IELTS (0-9) & OET (0-500) score calculator. Convert raw scores out of 40/42, calculate overall bands, and verify NMC UK, GMC UK, & AHPRA passing scores.">
+    <meta name="keywords" content="IELTS score calculator, OET band calculator, IELTS band score, OET grade converter, NMC UK passing score, GMC UK OET requirements, AHPRA OET score">
+    <meta name="theme-color" content="#0f172a">
+
+    <!-- Open Graph / WhatsApp Sharing Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-cloudflare-pages-domain.pages.dev">
+    <meta property="og:title" content="🎯 IELTS & OET Band Score Calculator (Official Scale)">
+    <meta property="og:description" content="Calculate your IELTS band score (0-9) & OET grade (A-E) instantly. Check if your score satisfies UK NMC, GMC, & AHPRA registration requirements!">
+    <meta property="og:image" content="https://placehold.co/1200x630/0f172a/ffffff?text=IELTS+%26+OET+Band+Score+Calculator">
+    <meta property="og:site_name" content="ScoreCalcPro">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IELTS & OET Score Calculator">
+    <meta name="twitter:description" content="Free calculator for IELTS Band Scores and OET Grades. Instant raw score converter & council requirements checker.">
+    <meta name="twitter:image" content="https://placehold.co/1200x630/0f172a/ffffff?text=IELTS+%26+OET+Band+Score+Calculator">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 
+      ===================================================================
+      MONETAG AD NETWORK SCRIPT INTEGRATION
+      Replace 'YOUR_MONETAG_ZONE_ID' below with your actual Monetag Zone ID.
+      ===================================================================
+    -->
+    <script>
+        /* 
+        (function(s,u,z,p){
+            s.src=u;
+            s.setAttribute('data-zone',z);
+            p.appendChild(s);
+        })(document.createElement('script'),'https://alwingulla.com/88/tag.min.js', YOUR_MONETAG_ZONE_ID, document.body||document.documentElement);
+        */
+        console.log("Monetag Ad SDK initialized.");
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brandDark: '#0f172a',
+                        ieltsRed: '#dc2626',
+                        oetTeal: '#0d9488',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-tab-ielts { border-bottom: 3px solid #dc2626; color: #dc2626; font-weight: 700; }
+        .active-tab-oet { border-bottom: 3px solid #0d9488; color: #0d9488; font-weight: 700; }
+        .custom-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .print-card { border: 1px solid #ccc !important; box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between pb-24 sm:pb-16">
+
+    <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-xl text-white shadow-md">
+                        <i class="fa-solid fa-graduation-cap text-xl sm:text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl font-extrabold tracking-tight">ScoreCalc<span class="text-indigo-400">Pro</span></h1>
+                        <p class="text-xs text-slate-400 hidden sm:block">IELTS & OET Official Band Converters</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="flex space-x-2 sm:space-x-6">
+                    <button id="tab-btn-ielts" onclick="switchTab('ielts')" class="active-tab-ielts py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                        IELTS
+                    </button>
+                    <button id="tab-btn-oet" onclick="switchTab('oet')" class="text-slate-400 hover:text-slate-200 py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all">
+                        <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+                        OET
+                    </button>
+                </nav>
+
+                <!-- WhatsApp Share Button -->
+                <button onclick="shareOnWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 px-3.5 rounded-lg flex items-center gap-2 shadow-sm transition-all">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span class="hidden md:inline">Share on WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full no-print">
+        <div class="bg-white border border-dashed border-slate-300 rounded-xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center relative overflow-hidden">
+            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-1">Advertisement</span>
+            <!-- 
+              MONETAG BANNER CONTAINER (728x90 Leaderboard / Responsive)
+              Insert your Monetag Display Banner code inside this div
+            -->
+            <div id="monetag-top-leaderboard" class="w-full text-slate-400 text-xs flex items-center justify-center gap-2 py-2">
+                <i class="fa-solid fa-rectangle-ad text-slate-300 text-xl"></i>
+                <span>Monetag Leaderboard Ad Space</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
+
+        <!-- ========================================== -->
+        <!-- SECTION 1: IELTS CALCULATOR TAB          -->
+        <!-- ========================================== -->
+        <section id="section-ielts" class="space-y-8">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-r from-red-700 via-rose-700 to-red-800 rounded-2xl p-6 sm:p-8 text-white custom-shadow relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="bg-red-900/60 text-red-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-red-500/30">Academic & General Training</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">IELTS Band Score Calculator</h2>
+                    <p class="mt-2 text-red-100 text-sm sm:text-base">Convert raw scores (0-40) into official IELTS Band Scores and calculate your overall band using standard rounding rules.</p>
+                </div>
+                <i class="fa-solid fa-award absolute -right-6 -bottom-6 text-9xl text-white/10 pointer-events-none"></i>
+            </div>
+
+            <!-- IELTS Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Side: Raw Score Converters -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 custom-shadow print-card">
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-sliders text-red-600"></i>
+                                Raw Score Converters (out of 40)
+                            </h3>
+                            <button onclick="resetIeltsRawScores()" class="text-xs text-slate-500 hover:text-red-600 font-medium flex items-center gap-1 transition-colors no-print">
+                                <i class="fa-solid fa-rotate-left"></i> Reset
+                            </button>
+                        </div>
+
+                        <div class="space-y-5">
+                            <!-- Listening -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 transition-all hover:border-red-300">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label for="ielts-raw-listening" class="font-semibold text-slate-800 text-sm flex items-center gap-2">
+                                        <i class="fa-solid fa-headphones text-red-500 w-4"></i> Listening Raw Score
+                                    </label>
+                                    <span id="ielts-listening-band-badge" class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded-md">Band --</span>
+                                </div>
+                                <div class="flex gap-3 items-center">
+                                    <input type="number" id="ielts-raw-listening" min="0" max="40" placeholder="0 - 40" oninput="calculateIeltsScores()" class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-slate-900 font-semibold focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                                    <span class="text-slate-400 font-medium text-sm">/ 40</span>
+                                </div>
+                            </div>
+
+                            <!-- Academic Reading -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 transition-all hover:border-red-300">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label for="ielts-raw-reading-acad" class="font-semibold text-slate-800 text-sm flex items-center gap-2">
+                                        <i class="fa-solid fa-book-open text-red-500 w-4"></i> Reading (Academic)
+                                    </label>
+                                    <span id="ielts-reading-acad-band-badge" class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded-md">Band --</span>
+                                </div>
+                                <div class="flex gap-3 items-center">
+                                    <input type="number" id="ielts-raw-reading-acad" min="0" max="40" placeholder="0 - 40" oninput="calculateIeltsScores()" class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-slate-900 font-semibold focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                                    <span class="text-slate-400 font-medium text-sm">/ 40</span>
+                                </div>
+                            </div>
+
+                            <!-- GT Reading -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 transition-all hover:border-red-300">
+                                <div class="flex justify-between items-center mb-2">
+                                    <label for="ielts-raw-reading-gt" class="font-semibold text-slate-800 text-sm flex items-center gap-2">
+                                        <i class="fa-solid fa-briefcase text-red-500 w-4"></i> Reading (General Training)
+                                    </label>
+                                    <span id="ielts-reading-gt-band-badge" class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1 rounded-md">Band --</span>
+                                </div>
+                                <div class="flex gap-3 items-center">
+                                    <input type="number" id="ielts-raw-reading-gt" min="0" max="40" placeholder="0 - 40" oninput="calculateIeltsScores()" class="w-full bg-white border border-slate-300 rounded-lg px-3.5 py-2 text-slate-900 font-semibold focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all">
+                                    <span class="text-slate-400 font-medium text-sm">/ 40</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sync Action Button -->
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end no-print">
+                            <button onclick="syncIeltsBandsToOverall()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-arrow-right-to-line"></i> Sync Bands to Overall Calculator
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- In-Feed Native Ad Slot -->
+                    <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-4 text-center min-h-[120px] flex flex-col items-center justify-center no-print">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-1">Sponsored Native Content</span>
+                        <div id="monetag-infeed-native" class="text-slate-400 text-xs flex items-center justify-center gap-2 py-3">
+                            <i class="fa-solid fa-ad text-slate-300 text-xl"></i>
+                            <span>Monetag Native Ad Container</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Overall IELTS Band Calculator -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 custom-shadow flex flex-col justify-between h-full print-card">
+                        <div>
+                            <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-calculator text-red-600"></i>
+                                    Overall Band Calculator
+                                </h3>
+                                <button onclick="resetIeltsOverallInputs()" class="text-xs text-slate-500 hover:text-red-600 font-medium no-print">Reset</button>
+                            </div>
+
+                            <p class="text-xs text-slate-500 mb-4">Select or auto-sync component band scores (0 - 9.0 in steps of 0.5):</p>
+
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div>
+                                    <label for="ielts-overall-listening" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Listening</label>
+                                    <select id="ielts-overall-listening" onchange="calculateIeltsOverall()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                                        <!-- Javascript generated options -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ielts-overall-reading" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Reading</label>
+                                    <select id="ielts-overall-reading" onchange="calculateIeltsOverall()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                                        <!-- Javascript generated options -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ielts-overall-writing" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Writing</label>
+                                    <select id="ielts-overall-writing" onchange="calculateIeltsOverall()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                                        <!-- Javascript generated options -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="ielts-overall-speaking" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Speaking</label>
+                                    <select id="ielts-overall-speaking" onchange="calculateIeltsOverall()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                                        <!-- Javascript generated options -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Display Box -->
+                        <div>
+                            <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl p-6 text-center shadow-inner relative overflow-hidden mt-4">
+                                <span class="text-xs uppercase font-bold text-slate-400 tracking-widest block mb-1">Calculated Overall Band</span>
+                                <div class="text-5xl font-black text-red-500 my-2" id="ielts-final-overall">0.0</div>
+                                <div class="text-xs text-slate-300" id="ielts-raw-average-text">Exact Mean Average: 0.00</div>
+
+                                <div class="mt-4 pt-3 border-t border-slate-700/80 text-left text-xs text-slate-400 leading-relaxed">
+                                    <span class="font-semibold text-slate-200 block mb-1"><i class="fa-solid fa-circle-info text-red-400"></i> IELTS Rounding Rule:</span>
+                                    Fractions ending in <strong>.25</strong> round up to <strong>.5</strong>. Fractions ending in <strong>.75</strong> round up to next whole band.
+                                </div>
+                            </div>
+
+                            <!-- Monetag Smartlink / Print Button CTA -->
+                            <button onclick="triggerSmartlinkAndAction()" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl shadow transition-all flex items-center justify-center gap-2 text-sm no-print">
+                                <i class="fa-solid fa-file-pdf"></i> Download / Print IELTS Score Summary
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- SECTION 2: OET CALCULATOR TAB             -->
+        <!-- ========================================== -->
+        <section id="section-oet" class="space-y-8 hidden">
+            <!-- OET Hero Banner -->
+            <div class="bg-gradient-to-r from-teal-700 via-teal-800 to-emerald-900 rounded-2xl p-6 sm:p-8 text-white custom-shadow relative overflow-hidden">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="bg-teal-900/60 text-teal-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-3 border border-teal-500/30">Occupational English Test</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">OET Score & Qualification Calculator</h2>
+                    <p class="mt-2 text-teal-100 text-sm sm:text-base">Estimate your OET scores (0–500) and Grades (A–E) for healthcare professions and verify compliance against global registration councils.</p>
+                </div>
+                <i class="fa-solid fa-stethoscope absolute -right-6 -bottom-6 text-9xl text-white/10 pointer-events-none"></i>
+            </div>
+
+            <!-- OET Main Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Side: Listening & Reading Raw Converters + Speaking/Writing Criteria -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Listening & Reading Module -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 custom-shadow print-card">
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-vial-circle-check text-teal-600"></i>
+                                Listening & Reading Raw Scores (out of 42)
+                            </h3>
+                            <button onclick="resetOetRaw()" class="text-xs text-slate-500 hover:text-teal-600 font-medium no-print">Reset</button>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Listening -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                                <label for="oet-raw-listening" class="font-semibold text-slate-800 text-sm flex items-center justify-between mb-2">
+                                    <span><i class="fa-solid fa-headphones text-teal-600 mr-1.5"></i> Listening</span>
+                                    <span id="oet-listening-grade" class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">Grade --</span>
+                                </label>
+                                <div class="flex gap-2 items-center mb-3">
+                                    <input type="number" id="oet-raw-listening" min="0" max="42" placeholder="0 - 42" oninput="calculateOetScores()" class="w-full bg-white border border-slate-300 rounded-lg p-2 font-semibold text-slate-900 focus:ring-2 focus:ring-teal-500 outline-none">
+                                    <span class="text-slate-400 font-medium text-sm">/ 42</span>
+                                </div>
+                                <div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center">
+                                    <span class="text-xs text-slate-500 block">Est. Score</span>
+                                    <span id="oet-listening-score" class="text-lg font-bold text-slate-800">--</span>
+                                </div>
+                            </div>
+
+                            <!-- Reading -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                                <label for="oet-raw-reading" class="font-semibold text-slate-800 text-sm flex items-center justify-between mb-2">
+                                    <span><i class="fa-solid fa-book-open text-teal-600 mr-1.5"></i> Reading</span>
+                                    <span id="oet-reading-grade" class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-0.5 rounded">Grade --</span>
+                                </label>
+                                <div class="flex gap-2 items-center mb-3">
+                                    <input type="number" id="oet-raw-reading" min="0" max="42" placeholder="0 - 42" oninput="calculateOetScores()" class="w-full bg-white border border-slate-300 rounded-lg p-2 font-semibold text-slate-900 focus:ring-2 focus:ring-teal-500 outline-none">
+                                    <span class="text-slate-400 font-medium text-sm">/ 42</span>
+                                </div>
+                                <div class="bg-white p-2.5 rounded-lg border border-slate-200 text-center">
+                                    <span class="text-xs text-slate-500 block">Est. Score</span>
+                                    <span id="oet-reading-score" class="text-lg font-bold text-slate-800">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Writing & Speaking Evaluator Module -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 custom-shadow print-card">
+                        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-pen-nib text-teal-600"></i>
+                                Writing & Speaking Scores
+                            </h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Writing Score Selector -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                                <label for="oet-writing-select" class="block font-semibold text-slate-800 text-sm mb-2"><i class="fa-solid fa-pen text-teal-600 mr-1.5"></i> Writing Score</label>
+                                <select id="oet-writing-select" onchange="calculateOetScores()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none mb-3">
+                                    <!-- Options generated via JS -->
+                                </select>
+                                <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-slate-200">
+                                    <span class="text-xs text-slate-500">Grade Equivalent:</span>
+                                    <span id="oet-writing-grade" class="font-bold text-teal-700 text-sm">--</span>
+                                </div>
+                            </div>
+
+                            <!-- Speaking Score Selector -->
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                                <label for="oet-speaking-select" class="block font-semibold text-slate-800 text-sm mb-2"><i class="fa-solid fa-comments text-teal-600 mr-1.5"></i> Speaking Score</label>
+                                <select id="oet-speaking-select" onchange="calculateOetScores()" class="w-full bg-white border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none mb-3">
+                                    <!-- Options generated via JS -->
+                                </select>
+                                <div class="flex justify-between items-center bg-white p-2.5 rounded-lg border border-slate-200">
+                                    <span class="text-xs text-slate-500">Grade Equivalent:</span>
+                                    <span id="oet-speaking-grade" class="font-bold text-teal-700 text-sm">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Side: Council Compliance Checker & Summary -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 custom-shadow print-card">
+                        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-check text-teal-600"></i>
+                                Council Score Requirement Checker
+                            </h3>
+                        </div>
+
+                        <!-- Council Selector -->
+                        <div class="mb-5">
+                            <label for="oet-council-select" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Target Registration Board</label>
+                            <select id="oet-council-select" onchange="checkCouncilRequirements()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-semibold text-slate-800 text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+                                <option value="nmc_uk">NMC UK (Nursing & Midwifery Council)</option>
+                                <option value="gmc_uk">GMC UK (General Medical Council)</option>
+                                <option value="ahpra">AHPRA Australia (Nursing / Medical)</option>
+                                <option value="ecfmg">ECFMG USA (Medical Graduates)</option>
+                            </select>
+                        </div>
+
+                        <!-- Status Alert Card -->
+                        <div id="oet-council-status" class="rounded-xl p-4 border transition-all mb-4 bg-slate-100 border-slate-200 text-slate-700">
+                            <div class="flex items-center gap-3">
+                                <i id="oet-status-icon" class="fa-solid fa-circle-info text-2xl text-slate-400"></i>
+                                <div>
+                                    <h4 id="oet-status-title" class="font-bold text-sm">Enter raw scores above</h4>
+                                    <p id="oet-status-desc" class="text-xs text-slate-500 mt-0.5">Calculated scores will be automatically benchmarked against the selected board.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Requirements Breakdown Table -->
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 text-xs space-y-2 mb-4">
+                            <h5 class="font-bold text-slate-800 mb-2 border-b border-slate-200 pb-1">Required Minimum Benchmarks:</h5>
+                            <div class="flex justify-between py-0.5"><span class="text-slate-500">Listening:</span><span id="req-listening" class="font-semibold text-slate-800">Score 350+</span></div>
+                            <div class="flex justify-between py-0.5"><span class="text-slate-500">Reading:</span><span id="req-reading" class="font-semibold text-slate-800">Score 350+</span></div>
+                            <div class="flex justify-between py-0.5"><span class="text-slate-500">Speaking:</span><span id="req-speaking" class="font-semibold text-slate-800">Score 350+</span></div>
+                            <div class="flex justify-between py-0.5"><span class="text-slate-500">Writing:</span><span id="req-writing" class="font-semibold text-slate-800">Score 300+</span></div>
+                        </div>
+
+                        <!-- Monetag Smartlink CTA for OET -->
+                        <button onclick="triggerSmartlinkAndAction()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl shadow transition-all flex items-center justify-center gap-2 text-sm no-print">
+                            <i class="fa-solid fa-file-pdf"></i> Download OET Eligibility Summary
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sticky Mobile & Desktop Floating Monetag Ad Container -->
+    <div id="sticky-bottom-ad" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-700 p-2 text-center shadow-lg transition-transform no-print">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-2">
+            <span class="text-[9px] text-slate-400 uppercase tracking-widest hidden sm:inline">Sponsored Ad</span>
+            
+            <!-- 
+              MONETAG STICKY BANNER (320x50 Mobile / 728x90 Desktop)
+              Paste your Monetag sticky banner code inside this div
+            -->
+            <div id="monetag-sticky-container" class="flex-grow flex items-center justify-center text-xs text-slate-400 gap-2">
+                <i class="fa-solid fa-rectangle-ad text-indigo-400"></i>
+                <span>Monetag Floating Sticky Ad Slot</span>
+            </div>
+
+            <button onclick="dismissStickyAd()" class="text-slate-400 hover:text-white p-1 rounded text-sm ml-2" title="Close Ad">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 ScoreCalcPro. Scores are calculated using standard official reference conversion tables for IELTS and OET.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================
+        // MONETAG DIRECT LINK / SMARTLINK CONFIG
+        // ==========================================
+        // Replace this string with your real Monetag Smartlink / Direct Link URL
+        const MONETAG_SMARTLINK_URL = "https://your-monetag-smartlink-url.com";
+
+        function triggerSmartlinkAndAction() {
+            if (MONETAG_SMARTLINK_URL && MONETAG_SMARTLINK_URL.startsWith("http") && !MONETAG_SMARTLINK_URL.includes("your-monetag-smartlink-url")) {
+                window.open(MONETAG_SMARTLINK_URL, '_blank');
+            }
+            window.print();
+        }
+
+        function shareOnWhatsApp() {
+            const pageUrl = window.location.href;
+            const shareText = encodeURIComponent(`🎯 Check your IELTS Band & OET Grades instantly with this official calculator: ${pageUrl}`);
+            window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
+        }
+
+        function dismissStickyAd() {
+            document.getElementById('sticky-bottom-ad').style.display = 'none';
+        }
+
+        // ==========================================
+        // IELTS & OET CONVERSION TABLES & LOGIC
+        // ==========================================
+
+        const ieltsListeningTable = {
+            39: 9.0, 40: 9.0, 37: 8.5, 38: 8.5, 35: 8.0, 36: 8.0, 32: 7.5, 33: 7.5, 34: 7.5,
+            30: 7.0, 31: 7.0, 26: 6.5, 27: 6.5, 28: 6.5, 29: 6.5, 23: 6.0, 24: 6.0, 25: 6.0,
+            18: 5.5, 19: 5.5, 20: 5.5, 21: 5.5, 22: 5.5, 16: 5.0, 17: 5.0, 13: 4.5, 14: 4.5, 15: 4.5,
+            10: 4.0, 11: 4.0, 12: 4.0, 6: 3.5, 7: 3.5, 8: 3.5, 9: 3.5, 4: 3.0, 5: 3.0, 3: 2.5, 2: 2.0, 1: 1.0, 0: 0.0
+        };
+
+        const ieltsReadingAcadTable = {
+            39: 9.0, 40: 9.0, 37: 8.5, 38: 8.5, 35: 8.0, 36: 8.0, 33: 7.5, 34: 7.5,
+            30: 7.0, 31: 7.0, 32: 7.0, 27: 6.5, 28: 6.5, 29: 6.5, 23: 6.0, 24: 6.0, 25: 6.0, 26: 6.0,
+            19: 5.5, 20: 5.5, 21: 5.5, 22: 5.5, 15: 5.0, 16: 5.0, 17: 5.0, 18: 5.0, 13: 4.5, 14: 4.5,
+            10: 4.0, 11: 4.0, 12: 4.0, 8: 3.5, 9: 3.5, 6: 3.0, 7: 3.0, 4: 2.5, 5: 2.5, 3: 2.0, 1: 1.0, 2: 1.0, 0: 0.0
+        };
+
+        const ieltsReadingGtTable = {
+            40: 9.0, 39: 8.5, 37: 8.0, 38: 8.0, 36: 7.5, 34: 7.0, 35: 7.0, 32: 6.5, 33: 6.5,
+            30: 6.0, 31: 6.0, 27: 5.5, 28: 5.5, 29: 5.5, 23: 5.0, 24: 5.0, 25: 5.0, 26: 5.0,
+            19: 4.5, 20: 4.5, 21: 4.5, 22: 4.5, 15: 4.0, 16: 4.0, 17: 4.0, 18: 4.0, 12: 3.5, 13: 3.5, 14: 3.5,
+            9: 3.0, 10: 3.0, 11: 3.0, 6: 2.5, 7: 2.5, 8: 2.5, 3: 2.0, 4: 2.0, 5: 2.0, 1: 1.0, 2: 1.0, 0: 0.0
+        };
+
+        function getOetRawMapping(raw) {
+            if (raw < 0 || isNaN(raw)) return { score: '--', grade: '--' };
+            if (raw >= 40) return { score: '450 - 500', grade: 'A' };
+            if (raw >= 35) return { score: '350 - 440', grade: 'B' };
+            if (raw >= 30) return { score: '300 - 340', grade: 'C+' };
+            if (raw >= 20) return { score: '200 - 290', grade: 'C' };
+            if (raw >= 10) return { score: '100 - 190', grade: 'D' };
+            return { score: '0 - 90', grade: 'E' };
+        }
+
+        const councilRequirements = {
+            nmc_uk: { listening: 350, reading: 350, speaking: 350, writing: 300, name: 'NMC UK (Nursing)' },
+            gmc_uk: { listening: 350, reading: 350, speaking: 350, writing: 350, name: 'GMC UK (Medicine)' },
+            ahpra: { listening: 350, reading: 350, speaking: 350, writing: 350, name: 'AHPRA Australia' },
+            ecfmg: { listening: 350, reading: 350, speaking: 350, writing: 300, name: 'ECFMG USA' }
+        };
+
+        let currentIeltsListeningBand = null;
+        let currentIeltsReadingAcadBand = null;
+        let currentIeltsReadingGtBand = null;
+
+        function switchTab(tab) {
+            const ieltsSec = document.getElementById('section-ielts');
+            const oetSec = document.getElementById('section-oet');
+            const ieltsBtn = document.getElementById('tab-btn-ielts');
+            const oetBtn = document.getElementById('tab-btn-oet');
+
+            if (tab === 'ielts') {
+                ieltsSec.classList.remove('hidden');
+                oetSec.classList.add('hidden');
+                ieltsBtn.className = "active-tab-ielts py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all";
+                oetBtn.className = "text-slate-400 hover:text-slate-200 py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all";
+            } else {
+                ieltsSec.classList.add('hidden');
+                oetSec.classList.remove('hidden');
+                oetBtn.className = "active-tab-oet py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all";
+                ieltsBtn.className = "text-slate-400 hover:text-slate-200 py-4 px-2 sm:px-3 text-sm sm:text-base font-semibold inline-flex items-center gap-2 transition-all";
+            }
+        }
+
+        function initSelectOptions() {
+            const ieltsSelects = ['ielts-overall-listening', 'ielts-overall-reading', 'ielts-overall-writing', 'ielts-overall-speaking'];
+            ieltsSelects.forEach(id => {
+                const el = document.getElementById(id);
+                el.innerHTML = '';
+                for (let b = 9.0; b >= 0.0; b -= 0.5) {
+                    const opt = document.createElement('option');
+                    opt.value = b.toFixed(1);
+                    opt.textContent = `Band ${b.toFixed(1)}`;
+                    el.appendChild(opt);
+                }
+                el.value = "6.0";
+            });
+
+            const oetScores = [
+                { val: 450, label: '450 - 500 (Grade A)' },
+                { val: 380, label: '350 - 440 (Grade B)' },
+                { val: 320, label: '300 - 340 (Grade C+)' },
+                { val: 250, label: '200 - 290 (Grade C)' },
+                { val: 150, label: '100 - 190 (Grade D)' },
+                { val: 50,  label: '0 - 90 (Grade E)' }
+            ];
+
+            ['oet-writing-select', 'oet-speaking-select'].forEach(id => {
+                const el = document.getElementById(id);
+                el.innerHTML = '';
+                oetScores.forEach(item => {
+                    const opt = document.createElement('option');
+                    opt.value = item.val;
+                    opt.textContent = item.label;
+                    el.appendChild(opt);
+                });
+                el.value = 380;
+            });
+        }
+
+        function calculateIeltsScores() {
+            const rawL = parseInt(document.getElementById('ielts-raw-listening').value);
+            const badgeL = document.getElementById('ielts-listening-band-badge');
+            if (!isNaN(rawL) && rawL >= 0 && rawL <= 40) {
+                currentIeltsListeningBand = ieltsListeningTable[rawL] ?? 0.0;
+                badgeL.textContent = `Band ${currentIeltsListeningBand.toFixed(1)}`;
+            } else {
+                currentIeltsListeningBand = null;
+                badgeL.textContent = `Band --`;
+            }
+
+            const rawRa = parseInt(document.getElementById('ielts-raw-reading-acad').value);
+            const badgeRa = document.getElementById('ielts-reading-acad-band-badge');
+            if (!isNaN(rawRa) && rawRa >= 0 && rawRa <= 40) {
+                currentIeltsReadingAcadBand = ieltsReadingAcadTable[rawRa] ?? 0.0;
+                badgeRa.textContent = `Band ${currentIeltsReadingAcadBand.toFixed(1)}`;
+            } else {
+                currentIeltsReadingAcadBand = null;
+                badgeRa.textContent = `Band --`;
+            }
+
+            const rawRg = parseInt(document.getElementById('ielts-raw-reading-gt').value);
+            const badgeRg = document.getElementById('ielts-reading-gt-band-badge');
+            if (!isNaN(rawRg) && rawRg >= 0 && rawRg <= 40) {
+                currentIeltsReadingGtBand = ieltsReadingGtTable[rawRg] ?? 0.0;
+                badgeRg.textContent = `Band ${currentIeltsReadingGtBand.toFixed(1)}`;
+            } else {
+                currentIeltsReadingGtBand = null;
+                badgeRg.textContent = `Band --`;
+            }
+        }
+
+        function syncIeltsBandsToOverall() {
+            if (currentIeltsListeningBand !== null) {
+                document.getElementById('ielts-overall-listening').value = currentIeltsListeningBand.toFixed(1);
+            }
+            if (currentIeltsReadingAcadBand !== null) {
+                document.getElementById('ielts-overall-reading').value = currentIeltsReadingAcadBand.toFixed(1);
+            } else if (currentIeltsReadingGtBand !== null) {
+                document.getElementById('ielts-overall-reading').value = currentIeltsReadingGtBand.toFixed(1);
+            }
+            calculateIeltsOverall();
+        }
+
+        function calculateIeltsOverall() {
+            const l = parseFloat(document.getElementById('ielts-overall-listening').value);
+            const r = parseFloat(document.getElementById('ielts-overall-reading').value);
+            const w = parseFloat(document.getElementById('ielts-overall-writing').value);
+            const s = parseFloat(document.getElementById('ielts-overall-speaking').value);
+
+            const avg = (l + r + w + s) / 4;
+            const rounded = roundIeltsBand(avg);
+
+            document.getElementById('ielts-final-overall').textContent = rounded.toFixed(1);
+            document.getElementById('ielts-raw-average-text').textContent = `Exact Mean Average: ${avg.toFixed(3)}`;
+        }
+
+        function roundIeltsBand(avg) {
+            const integerPart = Math.floor(avg);
+            const decimalPart = avg - integerPart;
+
+            if (decimalPart < 0.25) return integerPart;
+            if (decimalPart < 0.75) return integerPart + 0.5;
+            return integerPart + 1.0;
+        }
+
+        function resetIeltsRawScores() {
+            document.getElementById('ielts-raw-listening').value = '';
+            document.getElementById('ielts-raw-reading-acad').value = '';
+            document.getElementById('ielts-raw-reading-gt').value = '';
+            calculateIeltsScores();
+        }
+
+        function resetIeltsOverallInputs() {
+            document.getElementById('ielts-overall-listening').value = "6.0";
+            document.getElementById('ielts-overall-reading').value = "6.0";
+            document.getElementById('ielts-overall-writing').value = "6.0";
+            document.getElementById('ielts-overall-speaking').value = "6.0";
+            calculateIeltsOverall();
+        }
+
+        function calculateOetScores() {
+            const rawL = parseInt(document.getElementById('oet-raw-listening').value);
+            const mapL = getOetRawMapping(rawL);
+            document.getElementById('oet-listening-grade').textContent = `Grade ${mapL.grade}`;
+            document.getElementById('oet-listening-score').textContent = mapL.score;
+
+            const rawR = parseInt(document.getElementById('oet-raw-reading').value);
+            const mapR = getOetRawMapping(rawR);
+            document.getElementById('oet-reading-grade').textContent = `Grade ${mapR.grade}`;
+            document.getElementById('oet-reading-score').textContent = mapR.score;
+
+            const valW = parseInt(document.getElementById('oet-writing-select').value);
+            document.getElementById('oet-writing-grade').textContent = getOetGradeFromVal(valW);
+
+            const valS = parseInt(document.getElementById('oet-speaking-select').value);
+            document.getElementById('oet-speaking-grade').textContent = getOetGradeFromVal(valS);
+
+            checkCouncilRequirements();
+        }
+
+        function getOetGradeFromVal(val) {
+            if (val >= 450) return 'A';
+            if (val >= 350) return 'B';
+            if (val >= 300) return 'C+';
+            if (val >= 200) return 'C';
+            if (val >= 100) return 'D';
+            return 'E';
+        }
+
+        function getNumericalMinFromRaw(raw) {
+            if (isNaN(raw)) return 0;
+            if (raw >= 40) return 450;
+            if (raw >= 35) return 350;
+            if (raw >= 30) return 300;
+            if (raw >= 20) return 200;
+            if (raw >= 10) return 100;
+            return 0;
+        }
+
+        function checkCouncilRequirements() {
+            const councilKey = document.getElementById('oet-council-select').value;
+            const req = councilRequirements[councilKey];
+
+            document.getElementById('req-listening').textContent = `Score ${req.listening}+`;
+            document.getElementById('req-reading').textContent = `Score ${req.reading}+`;
+            document.getElementById('req-speaking').textContent = `Score ${req.speaking}+`;
+            document.getElementById('req-writing').textContent = `Score ${req.writing}+`;
+
+            const rawL = parseInt(document.getElementById('oet-raw-listening').value);
+            const rawR = parseInt(document.getElementById('oet-raw-reading').value);
+            const valL = getNumericalMinFromRaw(rawL);
+            const valR = getNumericalMinFromRaw(rawR);
+            const valW = parseInt(document.getElementById('oet-writing-select').value);
+            const valS = parseInt(document.getElementById('oet-speaking-select').value);
+
+            const statusBox = document.getElementById('oet-council-status');
+            const statusIcon = document.getElementById('oet-status-icon');
+            const statusTitle = document.getElementById('oet-status-title');
+            const statusDesc = document.getElementById('oet-status-desc');
+
+            if (isNaN(rawL) || isNaN(rawR)) {
+                statusBox.className = "rounded-xl p-4 border transition-all mb-4 bg-slate-100 border-slate-200 text-slate-700";
+                statusIcon.className = "fa-solid fa-circle-info text-2xl text-slate-400";
+                statusTitle.textContent = "Raw Scores Incomplete";
+                statusDesc.textContent = "Please enter Listening and Reading raw scores (out of 42) to check status.";
+                return;
+            }
+
+            const passesL = valL >= req.listening;
+            const passesR = valR >= req.reading;
+            const passesW = valW >= req.writing;
+            const passesS = valS >= req.speaking;
+
+            if (passesL && passesR && passesW && passesS) {
+                statusBox.className = "rounded-xl p-4 border transition-all mb-4 bg-emerald-50 border-emerald-300 text-emerald-900";
+                statusIcon.className = "fa-solid fa-circle-check text-2xl text-emerald-600";
+                statusTitle.textContent = `Meets ${req.name} Requirements!`;
+                statusDesc.textContent = "Congratulations! Your calculated OET scores satisfy all registration criteria.";
+            } else {
+                statusBox.className = "rounded-xl p-4 border transition-all mb-4 bg-rose-50 border-rose-300 text-rose-900";
+                statusIcon.className = "fa-solid fa-circle-xmark text-2xl text-rose-600";
+                statusTitle.textContent = `Below ${req.name} Threshold`;
+                statusDesc.textContent = "One or more calculated components fall below the required score threshold.";
+            }
+        }
+
+        function resetOetRaw() {
+            document.getElementById('oet-raw-listening').value = '';
+            document.getElementById('oet-raw-reading').value = '';
+            calculateOetScores();
+        }
+
+        window.onload = function() {
+            initSelectOptions();
+            calculateIeltsOverall();
+            calculateOetScores();
+        };
+    </script>
+</body>
+</html>

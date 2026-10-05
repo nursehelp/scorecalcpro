@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Monetag Verification Tag -->
     <meta name="monetag" content="6a71476c2ef72b5b9547878b66c51b18">
 
     <title>IELTS & OET Band Score Calculator | Instant Band & Grade Converter</title>
     
-    <!-- Primary Meta Tags -->
     <meta name="title" content="IELTS & OET Band Score Calculator | Instant Band & Grade Converter">
     <meta name="description" content="Free official IELTS (0-9) & OET (0-500) score calculator. Convert raw scores out of 40/42, calculate overall bands, and verify NMC UK, GMC UK, & AHPRA passing scores.">
     <meta name="keywords" content="IELTS score calculator, OET band calculator, IELTS band score, OET grade converter, NMC UK passing score, GMC UK OET requirements, AHPRA OET score">
     <meta name="theme-color" content="#0f172a">
 
-    <!-- Open Graph / WhatsApp Sharing Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-cloudflare-pages-domain.pages.dev">
     <meta property="og:title" content="🎯 IELTS & OET Band Score Calculator (Official Scale)">
@@ -22,7 +19,6 @@
     <meta property="og:image" content="https://placehold.co/1200x630/0f172a/ffffff?text=IELTS+%26+OET+Band+Score+Calculator">
     <meta property="og:site_name" content="ScoreCalcPro">
 
-    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="IELTS & OET Score Calculator">
     <meta name="twitter:description" content="Free calculator for IELTS Band Scores and OET Grades. Instant raw score converter & council requirements checker.">
@@ -32,22 +28,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- 
-      ===================================================================
-      MONETAG AD NETWORK SCRIPT INTEGRATION
-      Replace 'YOUR_MONETAG_ZONE_ID' below with your actual Monetag Zone ID.
-      ===================================================================
-    -->
-    <script>
-        /* 
-        (function(s,u,z,p){
-            s.src=u;
-            s.setAttribute('data-zone',z);
-            p.appendChild(s);
-        })(document.createElement('script'),'https://alwingulla.com/88/tag.min.js', YOUR_MONETAG_ZONE_ID, document.body||document.documentElement);
-        */
-        console.log("Monetag Ad SDK initialized.");
-    </script>
+    <!-- Monetag Multitag Script -->
+    <script src="https://quge5.com/88/tag.min.js" data-zone="291092" async data-cfasync="false"></script>
 
     <script>
         tailwind.config = {
@@ -113,10 +95,6 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full no-print">
         <div class="bg-white border border-dashed border-slate-300 rounded-xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center relative overflow-hidden">
             <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-1">Advertisement</span>
-            <!-- 
-              MONETAG BANNER CONTAINER (728x90 Leaderboard / Responsive)
-              Insert your Monetag Display Banner code inside this div
-            -->
             <div id="monetag-top-leaderboard" class="w-full text-slate-400 text-xs flex items-center justify-center gap-2 py-2">
                 <i class="fa-solid fa-rectangle-ad text-slate-300 text-xl"></i>
                 <span>Monetag Leaderboard Ad Space</span>
@@ -208,12 +186,12 @@
                         </div>
                     </div>
 
-                    <!-- In-Feed Native Ad Slot -->
-                    <div class="bg-white border border-dashed border-slate-300 rounded-2xl p-4 text-center min-h-[120px] flex flex-col items-center justify-center no-print">
-                        <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-1">Sponsored Native Content</span>
-                        <div id="monetag-infeed-native" class="text-slate-400 text-xs flex items-center justify-center gap-2 py-3">
-                            <i class="fa-solid fa-ad text-slate-300 text-xl"></i>
-                            <span>Monetag Native Ad Container</span>
+                    <!-- In-Feed Native Ad Slot Integrated -->
+                    <div class="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-4 text-center min-h-[120px] flex flex-col items-center justify-center no-print">
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-2">Sponsored Native Content</span>
+                        <div class="native-ad-wrapper w-full flex justify-center">
+                            <!-- Paste your exact Monetag script URL below -->
+                            <script src="https://your-actual-monetag-zone-script.js"></script>
                         </div>
                     </div>
                 </div>
@@ -272,11 +250,6 @@
                                     Fractions ending in <strong>.25</strong> round up to <strong>.5</strong>. Fractions ending in <strong>.75</strong> round up to next whole band.
                                 </div>
                             </div>
-
-                            <!-- Monetag Smartlink / Print Button CTA -->
-                            <button onclick="triggerSmartlinkAndAction()" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-xl shadow transition-all flex items-center justify-center gap-2 text-sm no-print">
-                                <i class="fa-solid fa-file-pdf"></i> Download / Print IELTS Score Summary
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -427,16 +400,32 @@
                             <div class="flex justify-between py-0.5"><span class="text-slate-500">Speaking:</span><span id="req-speaking" class="font-semibold text-slate-800">Score 350+</span></div>
                             <div class="flex justify-between py-0.5"><span class="text-slate-500">Writing:</span><span id="req-writing" class="font-semibold text-slate-800">Score 300+</span></div>
                         </div>
-
-                        <!-- Monetag Smartlink CTA for OET -->
-                        <button onclick="triggerSmartlinkAndAction()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded-xl shadow transition-all flex items-center justify-center gap-2 text-sm no-print">
-                            <i class="fa-solid fa-file-pdf"></i> Download OET Eligibility Summary
-                        </button>
                     </div>
                 </div>
 
             </div>
         </section>
+
+        <!-- Global Call to Action Buttons Integrated -->
+        <div class="bg-white border border-slate-200 custom-shadow rounded-2xl p-8 mt-8 no-print">
+            <div class="flex flex-col gap-4 max-w-sm mx-auto">
+                <!-- 1. Download PDF Button -->
+                <button onclick="triggerSmartlinkAndAction()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                    Download / Print Score Summary
+                </button>
+
+                <!-- 2. Share on WhatsApp Button -->
+                <button onclick="shareOnWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold py-3 px-6 rounded-lg shadow-sm transition-colors flex items-center justify-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Share on WhatsApp
+                </button>
+            </div>
+        </div>
 
     </main>
 
@@ -445,10 +434,6 @@
         <div class="max-w-7xl mx-auto flex items-center justify-between px-2">
             <span class="text-[9px] text-slate-400 uppercase tracking-widest hidden sm:inline">Sponsored Ad</span>
             
-            <!-- 
-              MONETAG STICKY BANNER (320x50 Mobile / 728x90 Desktop)
-              Paste your Monetag sticky banner code inside this div
-            -->
             <div id="monetag-sticky-container" class="flex-grow flex items-center justify-center text-xs text-slate-400 gap-2">
                 <i class="fa-solid fa-rectangle-ad text-indigo-400"></i>
                 <span>Monetag Floating Sticky Ad Slot</span>
@@ -471,8 +456,7 @@
         // ==========================================
         // MONETAG DIRECT LINK / SMARTLINK CONFIG
         // ==========================================
-        // Replace this string with your real Monetag Smartlink / Direct Link URL
-        const MONETAG_SMARTLINK_URL = "https://your-monetag-smartlink-url.com";
+        const MONETAG_SMARTLINK_URL = "https://omg10.com/4/11963097";
 
         function triggerSmartlinkAndAction() {
             if (MONETAG_SMARTLINK_URL && MONETAG_SMARTLINK_URL.startsWith("http") && !MONETAG_SMARTLINK_URL.includes("your-monetag-smartlink-url")) {

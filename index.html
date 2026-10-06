@@ -28,9 +28,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Monetag Multitag Script -->
-    <script src="https://quge5.com/88/tag.min.js" data-zone="291092" async data-cfasync="false"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -56,7 +53,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between pb-24 sm:pb-16">
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between pb-16">
 
     <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,12 +89,12 @@
         </div>
     </header>
 
+    <!-- AD CONTAINER 1: Leaderboard Ad Space -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 w-full no-print">
         <div class="bg-white border border-dashed border-slate-300 rounded-xl p-3 text-center min-h-[90px] flex flex-col items-center justify-center relative overflow-hidden">
             <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-1">Advertisement</span>
             <div id="monetag-top-leaderboard" class="w-full text-slate-400 text-xs flex items-center justify-center gap-2 py-2">
-                <i class="fa-solid fa-rectangle-ad text-slate-300 text-xl"></i>
-                <span>Monetag Leaderboard Ad Space</span>
+                <script>(function(s){s.dataset.zone='11968603',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
             </div>
         </div>
     </div>
@@ -186,12 +183,11 @@
                         </div>
                     </div>
 
-                    <!-- In-Feed Native Ad Slot Integrated -->
+                    <!-- AD CONTAINER 2: Sponsored Native Content -->
                     <div class="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-4 text-center min-h-[120px] flex flex-col items-center justify-center no-print">
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold mb-2">Sponsored Native Content</span>
                         <div class="native-ad-wrapper w-full flex justify-center">
-                            <!-- Paste your exact Monetag script URL below -->
-                            <script src="https://your-actual-monetag-zone-script.js"></script>
+                            <script>(function(s){s.dataset.zone='11968603',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
                         </div>
                     </div>
                 </div>
@@ -429,22 +425,6 @@
 
     </main>
 
-    <!-- Sticky Mobile & Desktop Floating Monetag Ad Container -->
-    <div id="sticky-bottom-ad" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-700 p-2 text-center shadow-lg transition-transform no-print">
-        <div class="max-w-7xl mx-auto flex items-center justify-between px-2">
-            <span class="text-[9px] text-slate-400 uppercase tracking-widest hidden sm:inline">Sponsored Ad</span>
-            
-            <div id="monetag-sticky-container" class="flex-grow flex items-center justify-center text-xs text-slate-400 gap-2">
-                <i class="fa-solid fa-rectangle-ad text-indigo-400"></i>
-                <span>Monetag Floating Sticky Ad Slot</span>
-            </div>
-
-            <button onclick="dismissStickyAd()" class="text-slate-400 hover:text-white p-1 rounded text-sm ml-2" title="Close Ad">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
         <div class="max-w-7xl mx-auto px-4">
@@ -469,10 +449,6 @@
             const pageUrl = window.location.href;
             const shareText = encodeURIComponent(`🎯 Check your IELTS Band & OET Grades instantly with this official calculator: ${pageUrl}`);
             window.open(`https://api.whatsapp.com/send?text=${shareText}`, '_blank');
-        }
-
-        function dismissStickyAd() {
-            document.getElementById('sticky-bottom-ad').style.display = 'none';
         }
 
         // ==========================================

@@ -478,11 +478,11 @@
 
         function getOetRawMapping(raw) {
             if (raw < 0 || isNaN(raw)) return { score: '--', grade: '--' };
-            if (raw >= 40) return { score: '450 - 500', grade: 'A' };
-            if (raw >= 35) return { score: '350 - 440', grade: 'B' };
-            if (raw >= 30) return { score: '300 - 340', grade: 'C+' };
-            if (raw >= 20) return { score: '200 - 290', grade: 'C' };
-            if (raw >= 10) return { score: '100 - 190', grade: 'D' };
+            if (raw >= 37) return { score: '450 - 500', grade: 'A' };
+            if (raw >= 30) return { score: '350 - 440', grade: 'B' };
+            if (raw >= 26) return { score: '300 - 340', grade: 'C+' };
+            if (raw >= 16) return { score: '200 - 290', grade: 'C' };
+            if (raw >= 8) return { score: '100 - 190', grade: 'D' };
             return { score: '0 - 90', grade: 'E' };
         }
 
@@ -664,11 +664,11 @@
 
         function getNumericalMinFromRaw(raw) {
             if (isNaN(raw)) return 0;
-            if (raw >= 40) return 450;
-            if (raw >= 35) return 350;
-            if (raw >= 30) return 300;
-            if (raw >= 20) return 200;
-            if (raw >= 10) return 100;
+            if (raw >= 37) return 450;
+            if (raw >= 30) return 350;
+            if (raw >= 26) return 300;
+            if (raw >= 16) return 200;
+            if (raw >= 8) return 100;
             return 0;
         }
 
